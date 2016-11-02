@@ -1,5 +1,6 @@
 var micromix = require("../index.js");
 var express = require("express");
+var microcule = require("microcule");
 var plugins = microcule.plugins;
 
 var app = micromix(express, plugins)({
