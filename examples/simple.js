@@ -1,10 +1,10 @@
-var microcule = require("microcule");
-var express = require("express");
 var micromix = require("../index.js");
+var express = require("express");
+var plugins = microcule.plugins;
 
-var app = micromix(express, microcule.plugins)({
+var app = micromix(express, plugins)({
   "/test": [{
-    "plugin": "spawn",
+    "plugin": plugins["spawn"],
     "config": {
       "code": "module.exports = function (hook) { hook.res.end('test'); };",
       "language": "javascript"
