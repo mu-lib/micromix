@@ -1,0 +1,23 @@
+{
+  "name": "micromix",
+  "version": "0.0.0",
+  "description": "Bundler of micro services",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mu-lib/micromix.git"
+  },
+  "keywords": [
+    "microcule"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mu-lib/micromix/issues"
+  },
+  "homepage": "https://github.com/mu-lib/micromix#readme",
+  "devDependencies": {
+    "express": "^4.14.0",
+    "microcule": "^4.0.2"
+  }
+}
