@@ -5,13 +5,13 @@ var toString = Object.prototype.toString;
 
 module.exports = function (express, plugins) {
   function callPlugin(plugin, config) {
-    return (toString.call(plugin) === "[object Function]" ? plugin : plugins[plugin])(config);
+    return (toString.call(plugin) === "[object Function]" ? plugin : plugins[plugin])[toString.call(config) === "[object Array]" ? "apply" : "call"](this, config);
   }
 
   function usePlugin(app, plugin) {
     return toString.call(plugin) === "[object Function]"
       ? plugin.call(app, express, plugins)
-      : app.use(callPlugin(plugin.plugin, plugin.config));
+      : app.use(callPlugin.call(app, plugin.plugin, plugin.config));
   }
 
   function useConfig(app, config) {
