@@ -18,9 +18,11 @@
   "bugs": {
     "url": "https://github.com/mu-lib/micromix/issues"
   },
+  "peerDependencies": {
+    "express": "^4.14.0"    
+  },
   "homepage": "https://github.com/mu-lib/micromix#readme",
   "devDependencies": {
-    "express": "^4.14.0",
     "microcule": "^4.0.2",
     "standard-version": "^2.4.0"
   }
