@@ -1,6 +1,6 @@
 {
   "name": "micromix",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Bundler of micro services",
   "main": "index.js",
   "repository": {
@@ -19,7 +19,7 @@
     "url": "https://github.com/mu-lib/micromix/issues"
   },
   "peerDependencies": {
-    "express": "^4.14.0"    
+    "express": "^4.14.0"
   },
   "homepage": "https://github.com/mu-lib/micromix#readme",
   "devDependencies": {
