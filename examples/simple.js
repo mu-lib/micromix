@@ -4,44 +4,73 @@ var microcule = require("microcule");
 var plugins = microcule.plugins;
 
 var app = micromix(express, plugins)({
-  "/test": [{
-    "plugin": plugins["spawn"],
+  "/function": [
+    {
+      "method": "get",
+      "uses": [{
+        "plugin": "spawn",
+        "config": {
+          "code": function (hook) { hook.res.end('get'); },
+          "language": "javascript"
+        }
+      }]
+    },
+    {
+      "method": "post",
+      "uses": {
+        "plugin": "spawn",
+        "config": {
+          "code": function (hook) { hook.res.end('post'); },
+          "language": "javascript"
+        }
+      }
+    }
+  ],
+  "/string": {
+    "plugin": "spawn",
     "config": {
       "code": "module.exports = function (hook) { hook.res.end('test'); };",
       "language": "javascript"
     }
-  }],
-  "/gist": [{
-    "plugin": "sourceGithubGist",
-    "config": {
-      "token": "1234",
-      "main": "echoHttpRequest.js",
-      "gistID": "357645b8a17daeb17458"
+  },
+  "/gist": {
+    "method": "get",
+    "uses": [
+      {
+        "plugin": "sourceGithubGist",
+        "config": {
+          "token": "1234",
+          "main": "echoHttpRequest.js",
+          "gistID": "357645b8a17daeb17458"
+        }
+      },
+      "bodyParser",
+      {
+        "plugin": "spawn",
+        "config": {
+          "language": "javascript"
+        }
+      }
+    ]
+  },
+  "/repo": [
+    {
+      "plugin": "sourceGithubRepo",
+      "config": {
+        "token": "1234",
+        "repo": "Stackvana/microservice-examples",
+        "branch": "master",
+        "main": "javascript/index.js",
+      }
+    },
+    "bodyParser",
+    {
+      "plugin": "spawn",
+      "config": {
+        "language": "javascript"
+      }
     }
-  }, {
-    "plugin": "bodyParser"
-  }, {
-    "plugin": "spawn",
-    "config": {
-      "language": "javascript"
-    }
-  }],
-  "/repo": [{
-    "plugin": "sourceGithubRepo",
-    "config": {
-      "token": "1234",
-      "repo": "Stackvana/microservice-examples",
-      "branch": "master",
-      "main": "javascript/index.js",
-    }
-  }, {
-    "plugin": "bodyParser"
-  }, {
-    "plugin": "spawn",
-    "config": {
-      "language": "javascript"
-    }
-  }]
+  ]
 });
 
 app.listen(3000, function () {
